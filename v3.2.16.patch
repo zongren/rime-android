@@ -1,0 +1,33 @@
+Subject: [PATCH] fix build
+---
+Index: app/src/main/jni/librime_jni/rime_jni.cc
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/jni/librime_jni/rime_jni.cc b/app/src/main/jni/librime_jni/rime_jni.cc
+--- a/app/src/main/jni/librime_jni/rime_jni.cc	(revision b7e541325f85e99d06b82167f0cf3fdc31ae6209)
++++ b/app/src/main/jni/librime_jni/rime_jni.cc	(date 1705384223850)
+@@ -12,7 +12,7 @@
+ extern void rime_require_module_octagram();
+ extern void rime_require_module_predict();
+ // librime is compiled as a static library, we have to link modules explicitly
+-static void declare_librime_module_dependencies() {
++extern "C" void declare_librime_module_dependencies() {
+   rime_require_module_lua();
+   rime_require_module_charcode();
+   rime_require_module_octagram();
+@@ -134,11 +134,11 @@
+ 
+ GlobalRefSingleton *GlobalRef;
+ 
+-JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *jvm, void *reserved) {
++/*JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *jvm, void *reserved) {
+   GlobalRef = new GlobalRefSingleton(jvm);
+   declare_librime_module_dependencies();
+   return JNI_VERSION_1_6;
+-}
++}*/
+ 
+ extern "C" JNIEXPORT void JNICALL Java_com_osfans_trime_core_Rime_startupRime(
+     JNIEnv *env, jclass clazz, jstring shared_dir, jstring user_dir,
