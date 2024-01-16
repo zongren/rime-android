@@ -5,6 +5,7 @@ import pers.zhc.gradle.plugins.ndk.rust.RustBuildPlugin
 import pers.zhc.gradle.plugins.ndk.rust.RustBuildPlugin.RustBuildPluginExtension
 import java.util.Properties
 
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
